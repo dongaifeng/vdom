@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<style>
+
+  .border {
+    border: 1px solid red;
+  }
+
+</style>
+
+<body>
+  <div id="app"></div>
+  <button id="btn">按钮</button>
+</body>
+
+</html>
+
+<script src="./vdom.js"></script>
+<script>
+
+  const vnode = createElement(
+    'div',
+    { id: 'test' },
+    [
+      createElement('p', {key: "a", style: { color: 'red' } }, '节点a'),
+      createElement('p', {key: "b", '@click': () => alert('xx') }, '节点b'),
+      createElement('p', {key: "c", class: 'header-item' }, '节点c'),
+      createElement('p', {key: "d", }, '节点d'),
+    ]
+  )
+
+  let vnode2 = createElement("div", { id: "test", class:"border" }, [
+              createElement("p", { key: "d" }, "节点d"),
+              createElement("p", { key: "a", style: { color: "red" } }, "节点a"),
+              createElement("p", { key: "b" }, "节点b"),
+              createElement("p", { key: "e" }, "节点e"),
+              createElement("p", { key: "f", style: { color: "green" } }, "节点f")
+      ]);
+
+  render(vnode, document.getElementById('app'))
+
+
+
+// 点击按钮 vnode改变
+  let btn = document.getElementById('btn');
+  btn.addEventListener('click', function() {
+    render(vnode2, document.getElementById('app'))
+  })
+</script>
